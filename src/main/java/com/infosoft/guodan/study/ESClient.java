@@ -16,7 +16,20 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 
 public class ESClient {
-    private Client client;
+	
+	private Client client;
+	/**es客户端连接
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		ESClient esclient=new ESClient();
+		esclient.initESClient();
+		esclient.search("guodan");
+		esclient.closeESClient();		
+		
+	}	
 	/**
 	 * 初始化客户端连接
 	 */
@@ -65,17 +78,6 @@ public class ESClient {
 		}
 		System.out.println("search success!!");
 	}
-	/**es客户端连接
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 
-		ESClient esclient=new ESClient();
-		esclient.initESClient();
-		esclient.search("guodan");
-		esclient.closeESClient();		
-		
-	}
 
 }
