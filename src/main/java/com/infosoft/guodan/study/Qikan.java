@@ -19,6 +19,14 @@ import com.alibaba.fastjson.JSONObject;
 public class Qikan {
 
 	BufferedReader BR = null;
+	public static void main(String[] args) throws IOException {
+		String filepath = args[0];
+		Qikan qk = new Qikan();
+		JSONArray array = qk.trvs(new File(filepath));
+		System.out.println(array.size());
+		qk.importBulkIndex(array);
+
+	}
 /**
  * 遍历一个目录下的文本文件，将文件内容解析成json格式，并存入json数组中
  * @param f
@@ -241,27 +249,20 @@ public class Qikan {
 									.field("SCORE", SCORE1.get(i))
 								 .endObject()));// 批量请求中添加数据			
 			count1++;
-			//BulkResponse bulkResponse = null;
 			if(count1==500){
 				BulkResponse bulkResponse = bulkRequest.execute().actionGet();
 				count1=0;
 			}
-			/*else{if(bulkResponse.hasFailures()) {
-				System.out.print("导入索引失败！");
-			}	}	*/	
 			
 	}
 		BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+		if (bulkResponse.hasFailures()) {
+			System.out.print("导入索引失败！");
+		}
 		System.out.print("用时：");
 		System.out.print(System.currentTimeMillis() - start);
+		node.close();
 	}
-	public static void main(String[] args) throws IOException {
-		String filepath = args[0];
-		Qikan qk = new Qikan();
-		JSONArray array = qk.trvs(new File(filepath));
-		System.out.println(array.size());
-		qk.importBulkIndex(array);
 
-	}
 
 }
