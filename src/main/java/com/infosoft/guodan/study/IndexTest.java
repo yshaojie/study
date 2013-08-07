@@ -88,7 +88,6 @@ public class IndexTest {
 				bulkRequest.execute();
 			}
 		}
-		
 		System.out.print("用时：");
 		System.out.print(System.currentTimeMillis() - start);
 	}
