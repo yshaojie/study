@@ -249,7 +249,9 @@ public class Qikan {
 			/*else{if(bulkResponse.hasFailures()) {
 				System.out.print("导入索引失败！");
 			}	}	*/	
+			
 	}
+		BulkResponse bulkResponse = bulkRequest.execute().actionGet();
 		System.out.print("用时：");
 		System.out.print(System.currentTimeMillis() - start);
 	}
