@@ -20,6 +20,15 @@ public class IndexTest {
 
 	BufferedReader BR = null;
 	static long Count = 0;
+	public static void main(String[] args) throws IOException {
+		String filepath = args[0];
+		IndexTest it = new IndexTest();
+		JSONArray array = it.trvs(new File(filepath));
+		System.out.println("--->array=" + array);
+		System.out.print(array.size());
+		it.importBulkIndex(array);
+
+	}
 /**
  * 遍历一个目录下的文本文件，将文件内容解析成json格式，并存入json数组中
  * @param f
@@ -92,14 +101,6 @@ public class IndexTest {
 		System.out.print(System.currentTimeMillis() - start);
 	}
 
-	public static void main(String[] args) throws IOException {
-		String filepath = args[0];
-		IndexTest it = new IndexTest();
-		JSONArray array = it.trvs(new File(filepath));
-		System.out.println("--->array=" + array);
-		System.out.print(array.size());
-		it.importBulkIndex(array);
 
-	}
 
 }
