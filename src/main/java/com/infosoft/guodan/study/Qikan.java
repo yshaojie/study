@@ -106,7 +106,7 @@ public class Qikan {
 		
 		Node node = nodeBuilder().node();// 建一个node
 		Client client = node.client();// 建一个client
-		BulkRequestBuilder bulkRequest = client.prepareBulk();// 批处理请求
+		BulkRequestBuilder bulkRequest = client.prepareBulk().setRefresh(true);// 批处理请求,注意:".setRefresh(true)"一定要设置,否则第一次建立索引查找不到数据
 		JSONObject json = null;
 		ArrayList<String> _ID1 = new ArrayList<String>();// 为字段分别建一个数组
 		ArrayList<String> WID1 = new ArrayList<String>();
