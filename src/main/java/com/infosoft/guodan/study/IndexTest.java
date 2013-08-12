@@ -70,7 +70,7 @@ public class IndexTest {
 		
 		Node node = nodeBuilder().node();// 建一个node
 		Client client = node.client();// 建一个client
-		BulkRequestBuilder bulkRequest = client.prepareBulk();// 批处理请求
+		BulkRequestBuilder bulkRequest = client.prepareBulk().setRefresh(true);// 批处理请求
 		JSONObject json = null;
 		ArrayList<String> userids = new ArrayList<String>();// 为三个字段分别建一个数组
 		ArrayList<String> usernames = new ArrayList<String>();
