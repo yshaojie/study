@@ -31,7 +31,7 @@ public class ElasticSearchHandler {
 		List<Products> result=esh.searchIndex(queryBuilder, indexname, type);//搜索
 		for(int i=0;i<result.size();i++){
 			Products p=result.get(i);
-			System.out.println("("+p.getId()+")商品名称："+p.getName()+"商品单价："+p.getPrice());
+			System.out.println("("+p.getId()+")商品名称："+p.getName()+"\t"+"商品单价："+p.getPrice());
 		}
 	}
 	
@@ -81,9 +81,8 @@ public class ElasticSearchHandler {
 			}
 		}
 		return list;
-			
+		
 	}
 		
-
   
 }
