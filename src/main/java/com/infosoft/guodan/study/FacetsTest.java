@@ -14,7 +14,7 @@ import org.elasticsearch.search.facet.terms.*;
 
 public class FacetsTest {
 
-	/**
+	/**几种类型的聚类
 	 * @param args
 	 */
 	Client client = new TransportClient()
