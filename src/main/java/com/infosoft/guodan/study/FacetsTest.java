@@ -22,7 +22,7 @@ public class FacetsTest {
 					"168.160.99.12", 9300));;
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 		FacetsTest ft = new FacetsTest();
 		ft.termsFacet();
 		ft.rangeFacet();

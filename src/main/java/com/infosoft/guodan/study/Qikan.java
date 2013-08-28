@@ -1,7 +1,4 @@
 package com.infosoft.guodan.study;
-import static org.elasticsearch.common.xcontent.XContentFactory.jsonBuilder;
-import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -11,7 +8,9 @@ import java.util.ArrayList;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.node.Node;
+import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.transport.InetSocketTransportAddress;
+import org.elasticsearch.common.xcontent.XContentFactory;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -19,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 public class Qikan {
 
 	BufferedReader BR = null;
+	Client client=new TransportClient().addTransportAddress(new InetSocketTransportAddress("168.160.99.12", 9300));// 建一个client
 	public static void main(String[] args) throws IOException {
 		String filepath = args[0];
 		Qikan qk = new Qikan();
@@ -103,9 +103,6 @@ public class Qikan {
      * @throws IOException
      */
 	public void importBulkIndex(JSONArray array) throws IOException {
-		
-		Node node = nodeBuilder().node();// 建一个node
-		Client client = node.client();// 建一个client
 		BulkRequestBuilder bulkRequest = client.prepareBulk().setRefresh(true);// 批处理请求,注意:".setRefresh(true)"一定要设置,否则第一次建立索引查找不到数据
 		JSONObject json = null;
 		ArrayList<String> _ID1 = new ArrayList<String>();// 为字段分别建一个数组
@@ -202,7 +199,7 @@ public class Qikan {
 			SCORE1.add(json.getString("SCORE"));	
 			bulkRequest.add(client.prepareIndex("qikan", "test", i + "")
 					.setSource(
-							jsonBuilder().startObject()
+							XContentFactory.jsonBuilder().startObject()
 									.field("_ID", _ID1.get(i))
 									.field("WID", WID1.get(i))
 									.field("VID", VID1.get(i))
@@ -261,7 +258,7 @@ public class Qikan {
 		}
 		System.out.print("用时：");
 		System.out.print(System.currentTimeMillis() - start);
-		node.close();
+		client.close();
 	}
 
 

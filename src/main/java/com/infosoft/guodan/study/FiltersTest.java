@@ -11,7 +11,7 @@ import org.elasticsearch.search.SearchHits;
 
 public class FiltersTest {
 
-	/**
+	/**过滤 filter test
 	 * @param args
 	 */
 	Client client = new TransportClient()
@@ -64,8 +64,8 @@ public class FiltersTest {
     * prefix filter
     */
    public void prefixFilter(){
-	   SearchResponse sr = client.prepareSearch("products")
-			   .setFilter(FilterBuilders.prefixFilter("name", "洗"))
+	   SearchResponse sr = client.prepareSearch("user")
+			   .setFilter(FilterBuilders.prefixFilter("username", "guo"))
 					   .execute()
 					   .actionGet();
 	   SearchHits sh=sr.getHits();
@@ -74,6 +74,7 @@ public class FiltersTest {
 		   SearchHit result=s[i];
 		   Map rs=result.getSource();
 		   System.out.println("prefix filter结果："+rs);
+		   
    }
    } 
 }

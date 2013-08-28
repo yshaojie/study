@@ -10,7 +10,6 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
@@ -18,7 +17,7 @@ import org.elasticsearch.search.SearchHits;
 public class ESClient {
 	
 	private Client client;
-	/**es客户端连接
+	/**es客户端连接,并进行信息检索
 	 * @param args
 	 */
 	public static void main(String[] args) {
